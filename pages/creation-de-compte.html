@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de compte</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="input.css">
+</head>
+<body>
+    <div class="min-h-screen flex justify-center items-center bg-cover bg-center"
+       style="background-image: url('/assets/images/f4e5d9.png');">
+    <div class="bg-white w-full max-w-md rounded-xl shadow-lg p-8">
+    <h1 class="  text-2xl font-bold text-center text-gray-800">
+           Créer un compte   </h1>
+    <div id="erreur" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+      <span id="erreur-message">Tous les champs doivent être remplis !</span>
+    </div>
+    <div>
+      <label class="block text-xl text-gray-600 mb-1">
+        Nom
+      </label>
+      <input
+        id="nom"
+        type="text"
+        class="w-full p-2 border border-gray-300 rounded
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="votre nom complet"
+      />
+      
+    </div>
+    <div>
+      <label class="block text-xl text-gray-600 mb-1">
+        Prenom
+      </label>
+      <input
+        id="prenom"
+        type="text"
+        class="w-full p-2 border border-gray-300 rounded
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="votre prénom"
+      />
+    </div>
+    <div>
+  <label class="block text-xl text-gray-600 mb-3">
+    Tu est un?
+  </label>
+  <div class="flex gap-8">
+    <label class="flex items-center">
+      <input id="client" type="radio" name="role" class="w-4 h-4" />
+      <span class="ml-2 text-gray-700">Client</span>
+    </label>
+    <label class="flex items-center">
+      <input id="vendeur" type="radio" name="role" class="w-4 h-4" />
+      <span class="ml-2 text-gray-700">Vendeur</span>
+    </label>
+    
+    </label>
+  </div>
+</div>
+    <div>
+      <label class="block text-xl text-gray-600 mb-1">
+        Numero de téléphone
+      </label>
+      <input
+        id="telephone"
+        type="tel"
+        class="w-full p-2 border border-gray-300 rounded
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="votre numéro de téléphone"
+      />
+    </div>
+    <div>
+      <label class="block text-xl text-gray-600 mb-1">
+        
+        Adresse Email
+      </label>
+      <input
+        id="email"
+        type="email"
+        class="w-full p-2 border border-gray-300 rounded
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="votre adresse email"
+      />
+    </div>
+    <div>
+      <label class="block text-xl text-gray-600 mb-1">
+        Mot de passe
+      </label>
+      <input
+        id="motdepasse"
+        type="password"
+        class="w-full p-2 border border-gray-300 rounded
+               focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
+        placeholder="votre mot de passe" /></div>
+    <button
+      type="button"
+      onclick="validerFormulaire()"
+      class="w-full bg-[#CF9B85] text-white py-2 rounded
+             hover:bg-[#AC9B85] ">
+      S'inscrire
+      
+    </button>
+    
+    <p class="text-sm text-center text-gray-500">
+      Déjà un compte ?
+      <a href="connexion.html" class="text-[#CF9B85] hover:underline">Se connecter</a>
+    </p>
+    </div>
+    </div>
+
+    <script>
+      function validerFormulaire() {
+        const nom = document.getElementById('nom').value.trim();
+        const prenom = document.getElementById('prenom').value.trim();
+        const telephone = document.getElementById('telephone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const motdepasse = document.getElementById('motdepasse').value.trim();
+        const client = document.getElementById('client').checked;
+        const vendeur = document.getElementById('vendeur').checked;
+        const erreurDiv = document.getElementById('erreur');
+        const erreurMsg = document.getElementById('erreur-message');
+
+        if (!nom || !prenom || !telephone || !email || !motdepasse || (!client && !vendeur)) {
+          
+          erreurDiv.classList.remove('hidden');
+          erreurMsg.textContent = "Tous les champs doivent être remplis !"
+          return;
+        } else {
+          erreurDiv.classList.add('hidden');
+        }
+
+         if (vendeur) {
+        window.location.href = "vendeur-infos.html";
+      } if (client) {
+        window.location.href = "succes-de-creation.html";
+    }
+      }
+      
+     
+    </script>
+</body>
+</html>
