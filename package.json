@@ -1,0 +1,24 @@
+{
+  "name": "projet_web_avella_vf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inesmtibaa-create/projet_web_avella_vf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/inesmtibaa-create/projet_web_avella_vf/issues"
+  },
+  "homepage": "https://github.com/inesmtibaa-create/projet_web_avella_vf#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
