@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/inesmtibaa-create/projet_web_avella_vf#readme",
   "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
     "tailwindcss": "^4.1.18"
   },
   "dependencies": {
