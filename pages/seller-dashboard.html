@@ -441,18 +441,64 @@
 
         </div>
     </footer>
+<div id="colorModal" class=" fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden   ">
+    <div class=" p-6 shadow-3xl bg-[#f4e5d9] bg-opacity-50 items-center justify-center rounded-2xl">
+      <button id="closeModal" class=" text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+      <h2 class="text-[#603f2a] text-3xl font-medium ml-10">Couleures disponibles</h2>
+      <div class="carousel mt-50 relative overflow-hidden h-[800px] w-[800px] mx-auto rounded-2xl  ">
+        <div class="list ">
+          <div
+            class="item transition-opacity duration-500 absolute inset-0 items-center bg-[#f4e5d9] rounded-2xl h-150 w-full ">
+            <img src="../boutiques/set.png" alt="" class=" rounded-2xl h-120 w-full" >
+            <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Beige</h1>
+            <button class="ml-60 mt-4 w-80 h-10 bg-[#6b5447] rounded-full text-orange-200">
+              Ajouter au panier</button>
+          </div>
+          <div
+            class=" item transition-opacity duration-500 inset-0 absolute items-center bg-[#f4e5d9] rounded-2xl h-150 w-full ">
+            <img src="../boutiques/blue.png" alt="" class=" rounded-2xl h-120 w-full" >
+            <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Blue</h1>
+            <button class="ml-60 mt-4 w-80 h-10 bg-[#6b5447] rounded-full text-orange-200">
+              Ajouter au panier</button>
+          </div>
+          <div
+            class="item transition-opacity duration-500 inset-0 absolute items-center bg-[#f4e5d9] rounded-2xl h-150 w-full ">
+            <img src="../boutiques/black_set.png" alt="" class=" rounded-2xl h-120 w-full" >
+            <h1 class="text-center text-2xl text-[#603f2a] mt-4"> noir</h1>
+            <button class="ml-60 mt-4 w-80 h-10 bg-[#6b5447] rounded-full text-orange-200">
+              Ajouter au panier</button>
+          </div>
+        </div>
+        <!-- arrows -->
+        <div class="arrrows ">
+          <button id="prev"
+            class="absolute left-4 top-60 -translate-y-1/2 bg-[#6b5447] w-10 h-10 rounded-full shadow-md flex items-center justify-center z-10 text-orange-200">
+            < </button>
+              <button id="next"
+                class="absolute right-4 top-60 -translate-y-1/2 bg-[#6b5447] w-10 h-10 rounded-full shadow-md flex items-center justify-center z-10 text-orange-200">
+                >
+              </button>
 
- <div id="colorModal"
-    class="absolute top-20 left-1/2 transform -translate-x-1/2 shadow-3xl bg-white bg-opacity-90 hidden flex-col items-center justify-center z-50 rounded-2xl p-6">
-    <button id="closeModal" class="self-end text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
-    <h2 class="text-[#603f2a] text-3xl font-medium mb-6">Couleurs disponibles</h2>
-    <div id="color_option" class="flex flex-wrap gap-4 justify-center">
-        <img src="../boutiques/set.png" alt="Beige" class="h-80 w-60 cursor-pointer rounded-lg shadow-md">
-        <img src="../boutiques/black_set.png" alt="Black" class="h-80 w-60 cursor-pointer rounded-lg shadow-md">
-        <img src="../boutiques/blue.png" alt="Blue" class="h-80 w-60 cursor-pointer rounded-lg shadow-md">
+        </div>
+      </div>
     </div>
-</div>  
+  </div>
 
+  <script>
+    const outfit = document.getElementById('prod1');
+    const modal = document.getElementById('colorModal');
+    const closeBtn = document.getElementById('closeModal');
+    const mainPage = document.getElementById('produitVendeur');
+    outfit.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      mainPage.classList.add('blur-sm');
+    });
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      mainPage.classList.remove('blur-sm');
+    });
+  </script>
+  
 
 
 <script src="../js/seller-page.js"></script>
