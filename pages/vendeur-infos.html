@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendeur Informations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="input.css">
+</head>
+
+<body class="bg-[#C99F85]">
+  <div class="min-h-screen flex justify-center items-center bg-[#C99F85]">
+    <div class="bg-white w-full max-w-md rounded-xl shadow-lg p-9 flex flex-col gap-4">
+
+      <h1 class="text-center md:text-4xl sm:text-3xl text-2xl text-[#5c3202] font-light font-serif mb-2">
+        Création de compte Vendeur
+      </h1>
+
+      <div id="erreur" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+        <span id="erreur-message">Tous les champs doivent être remplis !</span>
+      </div>
+
+      <div>
+        <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Nom du projet</label>
+        <input id="nomProjet" type="text"
+          class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
+          placeholder="nom de votre projet" />
+      </div>
+
+      <div>
+        <label class="block text-xl text-[#5c3202] font-serif font-light mb-2">Catégorie</label>
+        <div class="flex flex-wrap gap-4">
+          <label class="flex items-center">
+            <input id="Vetements" type="radio" name="categorie" class="w-4 h-4" />
+            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Vêtements</span>
+          </label>
+          <label class="flex items-center">
+            <input id="Accessoires" type="radio" name="categorie" class="w-4 h-4" />
+            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Accessoires</span>
+          </label>
+          <label class="flex items-center">
+            <input id="Chaussures" type="radio" name="categorie" class="w-4 h-4" />
+            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Chaussures</span>
+          </label>
+          <label class="flex items-center">
+            <input id="decorMaison" type="radio" name="categorie" class="w-4 h-4" />
+            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Décor maison</span>
+          </label>
+          <label class="flex items-center">
+            <input id="ProduitAlimentaires" type="radio" name="categorie" class="w-4 h-4" />
+            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Produits alimentaires</span>
+          </label>
+          <label class="flex items-center">
+            <input id="Beaute" type="radio" name="categorie" class="w-4 h-4" />
+            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Beauté</span>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Lien du compte Instagram/Facebook</label>
+        <input id="instagram" type="url"
+          class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
+          placeholder="https://..." />
+      </div>
+
+      <div>
+        <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Numéro d'identification fiscale (si
+          existe)</label>
+        <input id="idFiscale" type="number"
+          class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
+          placeholder="votre numéro fiscal" />
+      </div>
+
+      <div>
+        <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Description du projet</label>
+        <input id="description" type="text"
+          class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
+          placeholder="décrivez votre projet" />
+      </div>
+
+      <button type="button" onclick="validerFormulairevendeur()"
+        class="w-full bg-[#C99F85] text-white p-2 rounded font-serif text-xl font-light hover:bg-[#b08870] transition-colors">
+        Valider
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    function validerFormulairevendeur() {
+      const nomProjet = document.getElementById('nomProjet').value.trim();
+      const instagram = document.getElementById('instagram').value.trim();
+      const idFiscale = document.getElementById('idFiscale').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const categorieSelectionnee = document.querySelector('input[name="categorie"]:checked');
+      const erreurDiv = document.getElementById('erreur');
+      const erreurMsg = document.getElementById('erreur-message');
+
+      if (!nomProjet || !instagram || !description || !categorieSelectionnee) {
+        erreurDiv.classList.remove('hidden');
+        erreurMsg.textContent = "Tous les champs doivent être remplis !";
+        return;
+      }
+      erreurDiv.classList.add('hidden');
+      window.location.href = 'succes-de-creation.html';
+    }
+  </script>
+</body>
+
+</html>
