@@ -1,3 +1,5 @@
+
+
 const items = document.querySelectorAll('.carousel .list .item');
 let current = 0;
 

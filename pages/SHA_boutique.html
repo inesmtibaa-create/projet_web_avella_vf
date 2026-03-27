@@ -50,7 +50,7 @@
     <div class="flex flex-wrap ml-10 gap-20 mt-10 ">
       <!-- div de  carte 1  -->
       <div class=" items-center bg-white rounded-2xl h-160 w-80 ">
-        <img src="../boutiques/set.png" alt="" class=" rounded-2xl h-90 w-80" id="set_femme">
+        <img src="../boutiques/set.png" alt="" class=" rounded-2xl h-90 w-80 product-card" data-id="1">
         <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Set Femme</h1>
         <h2 class="text-center text-l text-[#603f2a] mt-2">199,9 Dinars</h2>
         <p class="text-[#99877c] font-medium text-sm text-center mt-4">Avec un blazer parfaitement ajusté,
@@ -60,8 +60,8 @@
         <button class="ml-20 mt-4 w-40 h-10 bg-[#6b5447] rounded-full text-orange-200">Ajouter au panier</button>
       </div>
       <!-- fin de carte 1 -->
-      <div class=" items-center bg-white rounded-2xl h-160 w-80  ">
-        <img src="../boutiques/robe.png" alt="" class=" rounded-2xl h-90 w-80 ">
+      <div class=" items-center bg-white rounded-2xl h-160 w-80">
+        <img src="../boutiques/robe.png" alt="" class=" rounded-2xl h-90 w-80 product-card " data-id="2">
         <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Robe </h1>
         <h2 class="text-center text-l text-[#603f2a] mt-2">220 Dinars</h2>
         <p class="text-[#99877c] font-medium text-sm text-center mt-4">
@@ -71,7 +71,7 @@
         <button class="ml-20 mt-4 w-40 h-10 bg-[#6b5447] rounded-full text-orange-200">Ajouter au panier</button>
       </div>
       <div class=" items-center bg-white rounded-2xl h-160 w-80  ">
-        <img src="../boutiques/abaya.png" alt="" class=" rounded-2xl h-90 w-80 ">
+        <img src="../boutiques/abaya.png" alt="" class=" rounded-2xl h-90 w-80 product-card " data-id="3">
         <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Abaya </h1>
         <h2 class="text-center text-l text-[#603f2a] mt-2">159 Dinars</h2>
         <p class="text-[#99877c] font-medium text-sm text-center mt-4">
@@ -81,8 +81,8 @@
         </p>
         <button class="ml-20 mt-4 w-40 h-10 bg-[#6b5447] rounded-full text-orange-200">Ajouter au panier</button>
       </div>
-      <div class=" items-center bg-white rounded-2xl h-160 w-80  ">
-        <img src="../boutiques/outfit.png" alt="" class=" rounded-2xl h-90 w-80 ">
+      <div class=" items-center bg-white rounded-2xl h-160 w-80">
+        <img src="../boutiques/outfit.png" alt="" class=" rounded-2xl h-90 w-80 product-card " data-id="4">
         <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Chic & Comfy Outfit </h1>
         <h2 class="text-center text-l text-[#603f2a] mt-2">286 Dinars</h2>
         <p class="text-[#99877c] font-medium text-sm text-center mt-4">
@@ -97,71 +97,29 @@
     </div>
   </section>
 
-  <!--color option (javascript)-->
-  <div id="colorModal" class=" fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden   ">
-    <div class=" p-6 shadow-3xl bg-[#f4e5d9] bg-opacity-50 items-center justify-center rounded-2xl">
-      <button id="closeModal" class=" text-gray-500 hover:text-gray-800 text-xl">&times;</button>
-      <h2 class="text-[#603f2a] text-3xl font-medium ml-10">Couleures disponibles</h2>
-      <div class="carousel mt-50 relative overflow-hidden h-[800px] w-[800px] mx-auto rounded-2xl  ">
-        <div class="list ">
-          <div
-            class="item transition-opacity duration-500 absolute inset-0 items-center bg-[#f4e5d9] rounded-2xl h-150 w-full ">
-            <img src="../boutiques/set.png" alt="" class=" rounded-2xl h-120 w-full" >
-            <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Beige</h1>
-            <button class="ml-60 mt-4 w-80 h-10 bg-[#6b5447] rounded-full text-orange-200">
-              Ajouter au panier</button>
-          </div>
-          <div
-            class=" item transition-opacity duration-500 inset-0 absolute items-center bg-[#f4e5d9] rounded-2xl h-150 w-full ">
-            <img src="../boutiques/blue.png" alt="" class=" rounded-2xl h-120 w-full" >
-            <h1 class="text-center text-2xl text-[#603f2a] mt-4"> Blue</h1>
-            <button class="ml-60 mt-4 w-80 h-10 bg-[#6b5447] rounded-full text-orange-200">
-              Ajouter au panier</button>
-          </div>
-          <div
-            class="item transition-opacity duration-500 inset-0 absolute items-center bg-[#f4e5d9] rounded-2xl h-150 w-full ">
-            <img src="../boutiques/black_set.png" alt="" class=" rounded-2xl h-120 w-full" >
-            <h1 class="text-center text-2xl text-[#603f2a] mt-4"> noir</h1>
-            <button class="ml-60 mt-4 w-80 h-10 bg-[#6b5447] rounded-full text-orange-200">
-              Ajouter au panier</button>
-          </div>
-        </div>
-        <!-- arrows -->
-        <div class="arrrows ">
-          <button id="prev"
-            class="absolute left-4 top-60 -translate-y-1/2 bg-[#6b5447] w-10 h-10 rounded-full shadow-md flex items-center justify-center z-10 text-orange-200">
-            < </button>
-              <button id="next"
-                class="absolute right-4 top-60 -translate-y-1/2 bg-[#6b5447] w-10 h-10 rounded-full shadow-md flex items-center justify-center z-10 text-orange-200">
-                >
-              </button>
-
-        </div>
+  <!--color option (javascript) / "le model"-->
+  <!-- UN SEUL modal pour TOUS les produits -->
+  <div id="productModal" class="fixed inset-0 bg-black/40
+flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-6 rounded-2xl shadow-xl w-[500px] h-auto">
+      <button id="closeModal">&times;</button>
+      <!-- Image : sera changee par JS -->
+      <img id="modal-img" src="" alt="" class="w-full rounded-xl h-90 object-cover">
+      <!-- Infos : remplies par JS -->
+      <h2 id="modal-name" class="text-2xl font-bold mt-3"></h2>
+      <p id="modal-price" class="text-orange-500 font-semibold"></p>
+      <p id="modal-desc" class="text-gray-500 text-sm mt-2"></p>
+      <!-- Couleurs : generees dynamiquement -->
+      <div class="mt-3">
+        <h3 class="font-medium">Couleurs disponibles</h3>
+        <div id="modal-colors" class="flex gap-2 mt-2"></div>
       </div>
+      <button class="mt-2 w-full bg-[#6b5447] text-orange-200
+rounded-full py-2">Ajouter au panier</button>
     </div>
   </div>
-
-  <script>
-    const outfit = document.getElementById('set_femme');
-    const modal = document.getElementById('colorModal');
-    const closeBtn = document.getElementById('closeModal');
-    const mainPage = document.getElementById('mainPage');
-    outfit.addEventListener('click', () => {
-      modal.classList.remove('hidden');
-      mainPage.classList.add('blur-sm');
-    });
-    closeBtn.addEventListener('click', () => {
-      modal.classList.add('hidden');
-      mainPage.classList.remove('blur-sm');
-    });
-  </script>
-  
-
-
-
-
-
-  <script src="../js/script.js"> </script>
+  <script src="../js/sha_products.js"> </script>
+  <script src="../js/fenetre_produit.js"> </script>
 
 </body>
 
