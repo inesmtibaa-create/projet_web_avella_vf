@@ -75,12 +75,12 @@
         </div>
 
 
-        <button onclick="prevSlide()"
+        <button onclick="prevSlidepub()"
             class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow">
             ❮
         </button>
 
-        <button onclick="nextSlide()"
+        <button onclick="nextSlidepub()"
             class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow">
             ❯
         </button>
@@ -92,90 +92,129 @@
         <p class="text-4xl  text-[#6c550f] font-bold font-serif relative left-12 top-40 ">
             Nos Categories
         </p>
-        <div id="categories" class="flexbox top-220 h-95 ">
-            <div id="vetements"
-                class="absolute top-220 left-6 transition delay-80 duration-50 ease-in-out  hover:scale-95 hover:outline-[#99546e] hover:outline-offset-5 hover:outline-2 hover:rounded-2xl ">
-                <button class="relative inline-block cursor-pointer    rounded-2xl shadow-xl/30  ">
-                    <img src="../images/Vetements.png" alt="image" class=" object-cover h-95 w-65  rounded-2xl ">
-                    <span
-                        class="absolute bottom-1 object-center font-serif text-[#ffff] text- text-shadow-4xl shadow-black font-bold text-xl">
-                        Vetements
-                    </span>
-                </button>
-            </div>
+        <div id="categories" class="absolute  top-220 p-4 overflow-hidden">
+            
+            <div class="overflow-hidden ">
+                <div id="categories-wrapper" class="flex h-100  transition-transform duration-500 ease-in-out ">
 
-            <div id="Chaussures"
-                class="absolute top-220 left-74 transition delay-80 duration-50 ease-in-out hover:scale-95 hover:outline-[#99546e] hover:outline-offset-5 hover:outline-2 hover:rounded-2xl ">
-                <button class="relative inline-block cursor-pointer    rounded-2xl shadow-xl/30">
-                    <img src="../images/chaussures.png" alt="image" class=" object-cover h-95 w-65  rounded-2xl ">
-                    <span
-                        class="absolute bottom-1 object-center font-serif text-[#ffff] text- text-shadow-4xl shadow-black font-bold text-xl">
-                        Chaussures </span>
-                </button>
-            </div>
+                    <div class="min-w-[260px] relative  rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/Vetements.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Vetements
+                            </span>
+                        </button>
+                    </div>
 
-            <div id="Accessoires"
-                class="absolute top-220 left-142 transition delay-80 duration-50 ease-in-out hover:scale-95 hover:outline-[#99546e] hover:outline-offset-5 hover:outline-2 hover:rounded-2xl ">
-                <button class="relative inline-block cursor-pointer    rounded-2xl shadow-xl/30">
-                    <img src="../images/accessoires.png" alt="image" class=" object-cover h-95 w-65  rounded-2xl ">
-                    <span
-                        class="absolute bottom-1 object-center font-serif text-[#ffff] text- text-shadow-4xl shadow-black font-bold text-xl">
-                        Accessoires
-                    </span>
-                </button>
-            </div>
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/chaussures.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Chaussures
+                            </span>
+                        </button>
+                    </div>
 
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/accessoires.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Accessoires
+                            </span>
+                        </button>
+                    </div>
 
-            <div id="Home Decor"
-                class="absolute top-220 left-210 transition delay-80 duration-50 ease-in-out hover:scale-95 hover:outline-[#99546e] hover:outline-offset-5 hover:outline-2 hover:rounded-2xl">
-                <button class="relative inline-block cursor-pointer    rounded-2xl shadow-xl/30  ">
-                    <img src="../images/HomeDecor.png" alt="image" class=" object-cover h-95 w-65  rounded-2xl ">
-                    <span
-                        class="absolute bottom-1 right-4 font-serif text-[#ffff] text- text-shadow-4xl shadow-black font-bold text-xl">
-                        Home Decor
-                    </span>
-                </button>
-            </div>
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/HomeDecor.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Home Decor
+                            </span>
+                        </button>
+                    </div>
 
-            <div id="Produits Alimentaires"
-                class="absolute top-220 left-278 transition delay-80 duration-50 ease-in-out hover:scale-95 hover:outline-[#99546e] hover:outline-offset-5 hover:outline-2 hover:rounded-2xl ">
-                <button class="relative inline-block cursor-pointer    rounded-2xl shadow-xl/30">
-                    <img src="../images/produitsalimentaires.png" alt="image"
-                        class=" object-cover h-95 w-65  rounded-2xl ">
-                    <span
-                        class="absolute bottom-1 right-4 font-serif text-[#ffff] text- text-shadow-4xl shadow-black font-bold text-xl">
-                        Produits Alimentaires
-                    </span>
-                </button>
-            </div>
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/produitsalimentaires.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Produits Alimentaires
+                            </span>
+                        </button>
+                    </div>
 
-            <div id="Beaute et Soins"
-                class="absolute top-220 left-346 transition delay-80 duration-50 ease-in-out hover:scale-95 hover:outline-[#99546e] hover:outline-offset-5 hover:outline-2 hover:rounded-l-2xl ">
-                <button class="relative inline-block cursor-pointer    rounded-l-2xl shadow-xl/30">
-                    <img src="../images/beaute&soins.png" alt="image" class=" object-cover h-95 w-65  rounded-l-2xl ">
-                    <span
-                        class="absolute bottom-1 object-center font-serif text-[#ffff] text- text-shadow-4xl shadow-black font-bold text-xl">
-                        Beaute&Soins
-                    </span>
-                </button>
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/beaute&soins.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Beaute & Soins
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/fitness.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Fitness & co
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/hightech.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                High Tech
+                            </span>
+                        </button>
+                    </div>
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/livres&bd.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Livres & BD
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="min-w-[260px] relative rounded-2xl mx-2 hover:scale-95 transition-transform ">
+                        <button class="relative inline-block w-full cursor-pointer rounded-2xl shadow-xl/30">
+                            <img src="images/artisanat.png" class="h-95 w-65 object-cover rounded-2xl">
+                            <span
+                                class="absolute bottom-2 left-2 text-white font-bold font-serif text-xl drop-shadow-lg">
+                                Artisanat
+                            </span>
+                        </button>
+                    </div>
+                    
+                    
+                </div>
             </div>
-            <button onclick="nextSlide()"
-                class="absolute right-3 top-267.5 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow">
-                ❯
-            </button>
 
             <button onclick="prevSlide()"
-                class="absolute left-3 top-267.5 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow">
+                class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow z-10">
                 ❮
             </button>
-
-
-
-        </div>
-
+            <button onclick="nextSlide()"
+                class="absolute left-366 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow z-10">
+                ❯
+            </button>
+        
+</div>
 
 
     </div>
+    
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <p class="text-4xl  text-[#6c550f] font-bold font-serif relative left-12 top-68 ">
         Tendances Actuelles
