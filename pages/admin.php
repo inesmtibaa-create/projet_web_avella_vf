@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$host='localhost'; $db='avella_db'; $user='root'; $pass=''; $charset='utf8mb4';
+$host='127.0.0.1'; $db='avella_base'; $user='root'; $pass='Chahd21*12*2005'; $charset='utf8mb4';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=$charset",$user,$pass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);
@@ -300,11 +300,11 @@ tbody td{padding:13px 18px;vertical-align:middle;font-size:13px;color:var(--text
       </div>
       <div class="table-wrap">
         <div class="tb-toolbar"><input class="search-input" type="text" placeholder="Rechercher…" oninput="filterT(this,'tu')"></div>
-        <table id="tu"><thead><tr><th>#</th><th>Nom</th><th>Email</th><th>Rôle</th><th>Inscrit le</th><th>Actions</th></tr></thead>
+        <table id="tu"><thead><tr><th>#</th><th>Nom</th><th>Email</th><th>Rôle</th><!--<th>Inscrit le</th>--><th>Actions</th></tr></thead>
         <tbody><?php
-        if(isset($pdo)){try{$rows=$pdo->query("SELECT * FROM users ORDER BY created_at DESC LIMIT 50")->fetchAll();
+        if(isset($pdo)){try{$rows=$pdo->query("SELECT * FROM users ")->fetchAll();
         if($rows)foreach($rows as $r){$role=$r['role']==='vendeur'?"<span class='pill pi'>Vendeur</span>":($r['role']==='admin'?"<span class='pill pw'>Admin</span>":"<span class='pill ps'>Acheteur</span>");
-        echo "<tr><td class='tdm'>#{$r['id']}</td><td class='tdm'>".htmlspecialchars($r['nom'])."</td><td>".htmlspecialchars($r['email'])."</td><td>$role</td><td>".date('d/m/Y',strtotime($r['created_at']))."</td><td><div class='act-c'><button class='btn btn-ghost btn-sm'>Modifier</button><button class='btn btn-danger btn-sm' onclick=\"delC('user',{$r['id']})\">Supprimer</button></div></td></tr>";}
+        echo "<tr><td class='tdm'>#{$r['id']}</td><td class='tdm'>".htmlspecialchars($r['name'])."</td><td>".htmlspecialchars($r['email'])."</td><td>$role</td><td><div class='act-c'><button class='btn btn-ghost btn-sm'>Modifier</button><button class='btn btn-danger btn-sm' onclick=\"delC('user',{$r['id']})\">Supprimer</button></div></td></tr>";}
         else echo "<tr><td colspan='6'><div class='empty'><div class='empty-ico'>👥</div><strong>Aucun utilisateur</strong></div></td></tr>";}
         catch(PDOException $e){echo "<tr><td colspan='6'><div class='empty'><div class='empty-ico'>⚠️</div><strong>Table non créée</strong></div></td></tr>";}}
         else echo "<tr><td colspan='6'><div class='empty'><div class='empty-ico'>🔌</div><strong>BDD non connectée</strong></div></td></tr>";
