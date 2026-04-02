@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -10,6 +11,7 @@
 </head>
 
 <body class="bg-[#C99F85]">
+    <form action="processvendeur-infos.php" method="post"enctype="multipart/form-data" onsubmit="return validerFormulairevendeur()">
   <div class="min-h-screen flex justify-center items-center bg-[#C99F85]">
     <div class="bg-white w-full max-w-md rounded-xl shadow-lg p-9 flex flex-col gap-4">
 
@@ -23,16 +25,19 @@
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Nom du projet</label>
-        <input id="nomProjet" type="text"
+        <input id="nomProjet" type="text" name="nomProjet"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="nom de votre projet" />
       </div>
+      
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">photo du boutique</label>
         <input id="photoBoutique" type="file" name="photo"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="photo de votre boutique" />
       </div>
+     
+
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-2">Catégorie</label>
@@ -66,7 +71,7 @@
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Lien du compte Instagram/Facebook</label>
-        <input id="instagram" type="url"
+        <input id="instagram" type="url" name="lien"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="https://..." />
       </div>
@@ -74,19 +79,19 @@
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Numéro d'identification fiscale (si
           existe)</label>
-        <input id="idFiscale" type="number"
+        <input id="idFiscale" type="number" name="idFiscale"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="votre numéro fiscal" />
       </div>
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Description du projet</label>
-        <input id="description" type="text"
+        <input id="description" type="text" name="description"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="décrivez votre projet" />
       </div>
 
-      <button type="button" onclick="validerFormulairevendeur()"
+      <button type="submit"
         class="w-full bg-[#C99F85] text-white p-2 rounded font-serif text-xl font-light hover:bg-[#b08870] transition-colors">
         Valider
       </button>
@@ -103,14 +108,14 @@
       const categorieSelectionnee = document.querySelector('input[name="categorie"]:checked');
       const erreurDiv = document.getElementById('erreur');
       const erreurMsg = document.getElementById('erreur-message');
+      const photoBoutique = document.getElementById('photoBoutique').files[0]
+       
 
-      if (!nomProjet || !instagram || !description || !categorieSelectionnee) {
+      if (!nomProjet || !instagram || !description || !categorieSelectionnee || !photoBoutique) {
         erreurDiv.classList.remove('hidden');
-        erreurMsg.textContent = "Tous les champs doivent être remplis !";
-        return;
+        return false;
       }
-      erreurDiv.classList.add('hidden');
-      window.location.href = 'succes-de-creation.html';
+      return true;
     }
   </script>
 </body>
