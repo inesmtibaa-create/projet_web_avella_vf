@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once 'autoload.php';
 
 
 if (empty($_POST['email']) || empty($_POST['password'])) {
