@@ -56,7 +56,11 @@ CREATE TABLE `produits` (
   KEY `idx_produits_nom` (`nom`),
   CONSTRAINT `fk_produits_categorie` FOREIGN KEY (`categorie_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+ALTER TABLE produits
+ADD boutique_id INT UNSIGNED NOT NULL,
+ADD CONSTRAINT fk_produits_boutique
+FOREIGN KEY (boutique_id) REFERENCES boutiques(id)
+ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE `commandes` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` INT UNSIGNED DEFAULT NULL,
@@ -75,10 +79,25 @@ CREATE TABLE `commande_produits` (
   `commande_id` INT UNSIGNED NOT NULL,
   `produit_id` INT UNSIGNED NOT NULL,
   `quantite` INT NOT NULL DEFAULT 1,
-  `prix_unitaire` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_cp_commande` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_cp_produit` FOREIGN KEY (`produit_id`) REFERENCES `produits` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE couleurs (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(50),
+  code_hex VARCHAR(7) NOT NULL
+);
+CREATE TABLE produit_couleur (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  produit_id INT UNSIGNED NOT NULL,
+  couleur_id INT UNSIGNED NOT NULL,
+  image VARCHAR(512) NOT NULL,
+
+  FOREIGN KEY (produit_id) REFERENCES produits(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (couleur_id) REFERENCES couleurs(id) ON DELETE CASCADE ON UPDATE CASCADE,
+
+  UNIQUE (produit_id, couleur_id)
+);
 
 SET FOREIGN_KEY_CHECKS = 1;
