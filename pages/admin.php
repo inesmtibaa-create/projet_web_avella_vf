@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once 'autoload.php';
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -114,22 +121,22 @@ tailwind.config = {
       <div class="grid grid-cols-4 gap-4 mb-8">
         <!-- Exemple de carte -->
         <div class="bg-cara-500 border border-cara-600/30 rounded-2xl p-5 relative overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all">
-          <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1">0</div>
+          <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1"><?php $user=new users(); echo $user->count() ; ?></div>
           <div class="text-[10px] tracking-[2.5px] uppercase text-cara-700">Utilisateurs</div>
         </div>
         <!-- ... autres cartes ... -->
           <div class="bg-cara-500 border border-cara-600/30 rounded-2xl p-5 relative overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all">
-   <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1">0</div>
+   <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1"><?php $boutiq=new boutiques(); echo $boutiq->count() ; ?></div>
    <div class="text-[10px] tracking-[2.5px] uppercase text-cara-700">Boutiques</div>
  </div>
  <!-- autre -->
    <div class="bg-cara-500 border border-cara-600/30 rounded-2xl p-5 relative overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all">
-   <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1">0</div>
+   <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1"><?php $cat=new categories(); echo $cat->count() ; ?></div>
    <div class="text-[10px] tracking-[2.5px] uppercase text-cara-700">Catégories</div>
  </div>
  <!-- autre -->
     <div class="bg-cara-500 border border-cara-600/30 rounded-2xl p-5 relative overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all">
-    <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1">0</div>
+    <div class="font-display text-4xl font-bold text-cara-900 leading-none mb-1"><?php $prod=new produits(); echo $prod->count() ; ?></div>
     <div class="text-[10px] tracking-[2.5px] uppercase text-cara-700">Produits</div>
   </div>
       </div>
@@ -160,19 +167,43 @@ tailwind.config = {
           <input type="text" placeholder="Rechercher…" oninput="filterTable(this, 'table-produits')"
             class="w-full max-w-sm bg-cara-200 border border-cara-600/30 rounded-full px-4 py-2 text-sm text-cara-900 placeholder-cara-600 focus:outline-none focus:border-cara-600">
         </div>
-        <table class="w-full" id="table-produits">
+        <table class="w-full border-separate border-spacing-0 rounded-lg overflow-hidden" id="table-produits">
           <thead>
             <tr>
               <!-- Colonnes  →  à personnaliser -->
-              <th class="th">#</th>
+              <th class="th">#id</th>
               <th class="th">Nom</th>
               <th class="th">Catégorie</th>
+              <th class="th">description</th>
               <th class="th">Prix</th>
+              <th class="th">image</th>
               <th class="th">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Lignes PHP ici -->
+            <?php 
+            $prod=new produits();
+            $tab=$prod->products_info();
+            foreach($tab as $row):
+              ?>
+              <tr class="h-20 ">
+              <td class="border-b border-l border-gray-300 p-2 text-center" id="id"> <?php echo $row->id ?></td>
+               <td class="border-b border-gray-300 text-center"> <?php echo $row->nom ?></td>
+                <td class="border-b border-gray-300 text-center"> <?php echo $row->categorie ?></td>
+                 <td class="border-b border-gray-300 text-center"> <?php echo $row->description?></td>
+                  <td class="border-b border-gray-300 text-center"> <?php echo $row->prix ?></td>
+                   <td class="border-b border-gray-300 "><img src='<?php echo $row->image ?>' alt=""class=" ml-2 h-12 w-12 rounded-full"></td>
+                    <td class="border-b border-gray-300 border-r gap-1 text-center"><button class="h-6 w-8 bg-cara-500  hover:bg-white/40">
+                    <img src="../images/eye-line.png" alt=""  class="ml-1"></button> 
+                      <button class="h-6 w-6 bg-cara-500 hover:bg-white/40 admin" >
+                 <img src="../images/edit-2-fill.png" alt=""  class="ml-1"></button>
+                <!-- button pour supprimer -->
+               <button  data-id="<?php echo $row->id ?>" class="h-6 w-8 bg-cara-500 hover:bg-white/40 admin eraser">
+              <img src="../images/eraser-fill.png" alt=""  class="ml-1"></button>
+                </td>
+              </tr>
+              <?php endforeach ?>
+           
           </tbody>
         </table>
       </div>

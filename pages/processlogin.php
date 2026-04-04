@@ -26,7 +26,7 @@ $_SESSION['nom']     = $user['nom'];
 if ($user['role'] === 'vendeur') {
     header('location: seller-dashboard.html');
 } else if ($user['role'] === 'admin') {
-    header('location: dashboard-admin.php');
+    header('location: admin.php');
 } else {
     header('location: seller-dashboard.html');
 }
