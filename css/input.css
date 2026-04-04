@@ -1,17 +1,10 @@
 @import "tailwindcss";
 
 .btn-primary {
-    @apply  rounded-full px-6 py-2.5 
-    m-1
-           bg-[#8B674F] text-[#FFF8F3] 
-           text-[0.95rem] font-semibold tracking-wide
-           shadow-[0_6px_14px_rgba(139,103,79,0.25)]
-           transition-all duration-300 
-           hover:bg-[#755440] hover:shadow-[0_10px_20px_rgba(139,103,79,0.35)]
-           active:scale-[0.97];
-  }
+  @apply rounded-full px-6 py-2.5 m-1 bg-[#8B674F] text-[#FFF8F3] text-[0.95rem] font-semibold tracking-wide shadow-[0_6px_14px_rgba(139, 103, 79, 0.25)] transition-all duration-300 hover:bg-[#755440] hover:shadow-[0_10px_20px_rgba(139, 103, 79, 0.35)] active:scale-[0.97];
+}
 
-  @theme {
+@theme {
   --color-avella6: #4A3328;
   --color-avella5: #5D4133;
   --color-avella4: #8B674F;

@@ -9,6 +9,7 @@
 </head>
 
 <body class="bg-[#C99F85]">
+  <form action="processcreationcompte.php" method="post" enctype="multipart/form-data" onsubmit="return validerFormulaire()">
   <div class="min-h-screen flex justify-center items-center bg-[#C99F85]">
     <div class="bg-white w-full max-w-md rounded-xl shadow-lg p-8 flex flex-col gap-4">
 
@@ -22,14 +23,14 @@
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Nom</label>
-        <input id="nom" type="text"
+        <input id="nom" type="text" name="name"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="votre nom complet" />
       </div>
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Prénom</label>
-        <input id="prenom" type="text"
+        <input id="prenom" type="text" name="prenom"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="votre prénom" />
       </div>
@@ -38,41 +39,41 @@
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-2">Tu es un ?</label>
         <div class="flex gap-8">
           <label class="flex items-center">
-            <input id="client" type="radio" name="role" class="w-4 h-4" />
+            <input id="client" type="radio" name="role" class="w-4 h-4" value="client"/>
             <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Client</span>
           </label>
           <label class="flex items-center">
-            <input id="vendeur" type="radio" name="role" class="w-4 h-4" />
-            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl">Vendeur</span>
+            <input id="vendeur" type="radio" name="role" class="w-4 h-4" value="vendeur" />
+            <span class="ml-2 text-[#5c3202] font-serif font-light text-xl" >Vendeur</span>
           </label>
         </div>
       </div>
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Numéro de téléphone</label>
-        <input id="telephone" type="tel"
+        <input id="telephone" type="tel" name="num"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="votre numéro de téléphone" />
       </div>
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Adresse Email</label>
-        <input id="email" type="email"
+        <input id="email" type="email" name="email"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="votre adresse email" />
       </div>
 
       <div>
         <label class="block text-xl text-[#5c3202] font-serif font-light mb-1">Mot de passe</label>
-        <input id="motdepasse" type="password"
+        <input id="motdepasse" type="password" name="password"
           class="w-full p-2 border border-gray-300 rounded font-serif text-[#5c3202] placeholder-[#C99F85] focus:outline-none focus:ring-2 focus:ring-[#C99F85]"
           placeholder="votre mot de passe" />
       </div>
 
-      <button type="button" onclick="validerFormulaire()"
+      <input type="submit" value=" S'inscrire"
         class="w-full bg-[#C99F85] text-white py-2 rounded font-serif text-xl font-light hover:bg-[#b08870] transition-colors">
-        S'inscrire
-      </button>
+      
+      </form>
 
       <p class="text-base text-center text-[#5c3202] font-serif font-light">
         Déjà un compte ?
@@ -81,33 +82,25 @@
 
     </div>
   </div>
-
+  
   <script>
-    function validerFormulaire() {
-      const nom = document.getElementById('nom').value.trim();
-      const prenom = document.getElementById('prenom').value.trim();
-      const telephone = document.getElementById('telephone').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const motdepasse = document.getElementById('motdepasse').value.trim();
-      const client = document.getElementById('client').checked;
-      const vendeur = document.getElementById('vendeur').checked;
-      const erreurDiv = document.getElementById('erreur');
-      const erreurMsg = document.getElementById('erreur-message');
+function validerFormulaire() {
+    const nom        = document.getElementById('nom').value.trim();
+    const prenom     = document.getElementById('prenom').value.trim();
+    const telephone  = document.getElementById('telephone').value.trim();
+    const email      = document.getElementById('email').value.trim();
+    const motdepasse = document.getElementById('motdepasse').value.trim();
+    const role       = document.querySelector('input[name="role"]:checked');
+    const erreurDiv  = document.getElementById('erreur');
 
-      if (!nom || !prenom || !telephone || !email || !motdepasse || (!client && !vendeur)) {
+    if (!nom || !prenom || !telephone || !email || !motdepasse || !role) {
         erreurDiv.classList.remove('hidden');
-        erreurMsg.textContent = "Tous les champs doivent être remplis !";
-        return;
-      } else {
-        erreurDiv.classList.add('hidden');
-      }
-
-      if (vendeur) {
-        window.location.href = "vendeur-infos.html";
-      } else if (client) {
-        window.location.href = "succes-de-creation.html";
-      }
+        return false; // bloque la soumission
     }
+
+    return true; 
+}
+    
   </script>
 </body>
 
