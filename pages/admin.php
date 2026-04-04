@@ -175,6 +175,7 @@ tailwind.config = {
               <th class="th">Nom</th>
               <th class="th">Catégorie</th>
               <th class="th">description</th>
+                <th class="th">boutique</th>
               <th class="th">Prix</th>
               <th class="th">image</th>
               <th class="th">Actions</th>
@@ -187,13 +188,14 @@ tailwind.config = {
             foreach($tab as $row):
               ?>
               <tr class="h-20 ">
-              <td class="border-b border-l border-gray-300 p-2 text-center" id="id"> <?php echo $row->id ?></td>
-               <td class="border-b border-gray-300 text-center"> <?php echo $row->nom ?></td>
-                <td class="border-b border-gray-300 text-center"> <?php echo $row->categorie ?></td>
-                 <td class="border-b border-gray-300 text-center"> <?php echo $row->description?></td>
-                  <td class="border-b border-gray-300 text-center"> <?php echo $row->prix ?></td>
-                   <td class="border-b border-gray-300 "><img src='<?php echo $row->image ?>' alt=""class=" ml-2 h-12 w-12 rounded-full"></td>
-                    <td class="border-b border-gray-300 border-r gap-1 text-center"><button class="h-6 w-8 bg-cara-500  hover:bg-white/40">
+              <td class="border-b border-l border-white/40 p-2 text-center" id="id"> <?php echo $row->id ?></td>
+               <td class="border-b border-white/40 text-center"> <?php echo $row->nom ?></td>
+                <td class="border-b border-white/40 text-center"> <?php echo $row->categorie ?></td>
+                 <td class="border-b border-white/40 text-center"> <?php echo $row->description?></td>
+                  <td class="border-b border-white/40 text-center"> <?php echo $row->boutique ?></td>
+                  <td class="border-b border-white/40 text-center"> <?php echo $row->prix ?></td>
+                   <td class="border-b border-white/40 "><img src='<?php echo $row->image ?>' alt=""class=" ml-2 h-12 w-12 rounded-full"></td>
+                    <td class="border-b border-white/40 border-r gap-1 text-center"><button class="h-6 w-8 bg-cara-500  hover:bg-white/40">
                     <img src="../images/eye-line.png" alt=""  class="ml-1"></button> 
                       <button class="h-6 w-6 bg-cara-500 hover:bg-white/40 admin" >
                  <img src="../images/edit-2-fill.png" alt=""  class="ml-1"></button>
@@ -328,33 +330,48 @@ tailwind.config = {
       <button onclick="closeModal('modal-produit')" class="text-cara-700 hover:text-cara-900 text-2xl leading-none">&times;</button>
     </div>
     <div class="p-6">
-      <form method="POST" action="actions/produit.php" enctype="multipart/form-data">
+      <form method="POST" action="ajout_produit.php" enctype="multipart/form-data">
         <input type="hidden" name="action" value="ajouter">
         <div class="grid grid-cols-2 gap-4">
 
           <!-- Champs  →  à remplir à ta façon -->
           <div class="col-span-2 field">
             <label>Nom du produit</label>
-            <input type="text" name="nom" required placeholder="Ex : Robe Avella Rose">
+            <input type="text" name="nom" required placeholder="Ex : Robe Avella Rose" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900">
           </div>
           <div class="field">
             <label>Prix (TND)</label>
-            <input type="number" name="prix" step="0.01" required placeholder="0.00">
+            <input type="number" name="prix" step="0.01" required placeholder="0.00" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900">
           </div>
+           <div class="field">
+           <label>id Boutique</label>
+           <input type="number" name="boutique_id" step="0.01" required placeholder="0.00" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900" >
+           </div>
+              
+              
+              
+              
+              
+              
           <div class="field">
             <label>Catégorie</label>
-            <select name="categorie_id">
-              <option value="">— Choisir —</option>
-              <!-- Options PHP ici -->
+            <select name="categorie_id" required>
+              <option value=''>— Choisir —</option>
+                   <?php
+                 $cat=new categories();
+                $tab=$cat->categorie();
+               foreach($tab as $row): ?>
+                 <option value='<?php echo $row->id ?>'><?php echo $row->nom ?></option>
+                 <?php endforeach ?>
             </select>
           </div>
           <div class="col-span-2 field">
             <label>Description</label>
-            <textarea name="description" rows="3" placeholder="Description…"></textarea>
+            <textarea name="description" rows="3" placeholder="Description…" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900"></textarea>
           </div>
           <div class="col-span-2 field">
             <label>Image</label>
-            <input type="file" name="image" accept="image/*">
+            <input type="file" name="image" accept="image/*" >
           </div>
 
         </div>
@@ -450,6 +467,31 @@ tailwind.config = {
     </div>
   </div>
 </div>
+<!-- delete-produit -->
+ <script>
+
+document.querySelectorAll('.eraser').forEach(btn => {
+  btn.addEventListener('click', function() {
+     const row = this.closest('tr');
+    const id = this.dataset.id; // récupère l'id depuis data-id
+    deleteItem('produit',id , row);  // ta fonction déjà existante !
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </script>
 
 <!-- ════════════════════════════════════════════
      STYLES UTILITAIRES (réutilisables partout)
@@ -549,26 +591,72 @@ function notify(msg, type = 's') {
 }
 
 // Suppression AJAX générique
-function deleteItem(type, id) {
-  if (!confirm('Supprimer cet élément ?')) return;
-  fetch('actions/delete.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `type=${type}&id=${id}`,
-  })
-  .then(r => r.json())
-  .then(d => {
-    notify(d.success ? '✓ Supprimé' : '✗ ' + d.message, d.success ? 's' : 'd');
-    if (d.success) setTimeout(() => location.reload(), 700);
-  })
-  .catch(() => notify('✗ Erreur réseau', 'd'));
+function deleteItem(type, id, row = null) {
+  // Ouvre la modal
+  openModal('modal-confirm');
+
+  // Bouton confirmer — clone pour éviter les doublons d'événements
+  const yes = document.getElementById('confirm-yes');
+  const yesCopy = yes.cloneNode(true);
+  yes.parentNode.replaceChild(yesCopy, yes);
+
+  yesCopy.addEventListener('click', function () {
+    closeModal('modal-confirm');
+
+    fetch('delete.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `type=${type}&id=${id}`,
+    })
+    .then(r => r.json())
+    .then(d => {
+      notify(d.success ? '✓ Supprimé' : '✗ ' + d.message, d.success ? 's' : 'd');
+      if (d.success) {
+        if (row) row.remove();
+        else setTimeout(() => location.reload(), 700);
+      }
+    })
+    .catch(() => notify('✗ Erreur réseau', 'd'));
+  });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Feedback URL (?success=1 ou ?error=msg)
 const qs = new URLSearchParams(location.search);
 if (qs.get('success')) notify('✓ Opération réussie');
 if (qs.get('error'))   notify('✗ ' + qs.get('error'), 'd');
 </script>
+<!-- Modal Confirmation Suppression -->
+<div id="modal-confirm" class="modal hidden fixed inset-0 bg-cara-900/50 z-[300] items-center justify-center backdrop-blur-sm">
+  <div class="modal-box bg-cara-100 border border-cara-600/30 rounded-2xl w-full max-w-sm shadow-2xl mx-4">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-cara-600/20 bg-cara-500 rounded-t-2xl">
+      <span class="font-display text-lg italic text-cara-900">Confirmation</span>
+      <button onclick="closeModal('modal-confirm')" class="text-cara-700 hover:text-cara-900 text-2xl leading-none">&times;</button>
+    </div>
+    <div class="p-6 text-center">
+      <div class="text-4xl mb-3">🗑️</div>
+      <p class="text-cara-800 text-sm mb-1">Voulez-vous vraiment supprimer</p>
+      <div class="flex justify-center gap-3">
+        <button onclick="closeModal('modal-confirm')" class="btn-ghost">Annuler</button>
+        <button id="confirm-yes" class="bg-cara-500 text-white border border-cara-500 px-4 py-2 rounded-xl text-sm font-medium hover:bg-cara-200 transition-all cursor-pointer">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

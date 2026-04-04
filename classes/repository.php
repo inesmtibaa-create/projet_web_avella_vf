@@ -38,7 +38,9 @@ abstract class repository implements irepository {
     public function delete($id){
       $req="delete from {$this->tablename} where id=?";
       $reponse=$this->bd->prepare($req);
-      $reponse->execute([(int) $id]);
+      $element=$reponse->execute([(int) $id]);
+      return $element ;
+      
     }
     public function update($id,$params){
        $keys=array_keys($params);
