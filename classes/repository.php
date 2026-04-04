@@ -17,8 +17,8 @@ abstract class repository implements irepository {
     public function selectid($id){
          $req= "select * from {$this->tablename} where id= ?";
          $reponse=$this->bd->prepare($req);
-         $element=$reponse->execute([$id]);
-         return $element->fetch(PDO::FETCH_OBJ);
+         $reponse->execute([$id]);
+         return $reponse->fetch(PDO::FETCH_OBJ);
 
     }
     
@@ -44,10 +44,11 @@ abstract class repository implements irepository {
     }
     public function update($id,$params){
        $keys=array_keys($params);
-       $string=implode('=? ,' , $keys);
+       $string=implode('=?, ' , $keys);
+        $string .= '=?';
        $req="Update {$this->tablename} set {$string} where id=?";
        $reponse=$this->bd->prepare($req);
-       $reponse->execute(array_values($params));
+       $reponse->execute([...array_values($params), $id]);
 
 
 

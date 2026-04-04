@@ -197,7 +197,7 @@ tailwind.config = {
                    <td class="border-b border-white/40 "><img src='<?php echo $row->image ?>' alt=""class=" ml-2 h-12 w-12 rounded-full"></td>
                     <td class="border-b border-white/40 border-r gap-1 text-center"><button class="h-6 w-8 bg-cara-500  hover:bg-white/40">
                     <img src="../images/eye-line.png" alt=""  class="ml-1"></button> 
-                      <button class="h-6 w-6 bg-cara-500 hover:bg-white/40 admin" >
+                      <button data-id="<?php echo $row->id ?>" class="h-6 w-6 bg-cara-500 hover:bg-white/40 modif" >
                  <img src="../images/edit-2-fill.png" alt=""  class="ml-1"></button>
                 <!-- button pour supprimer -->
                <button  data-id="<?php echo $row->id ?>" class="h-6 w-8 bg-cara-500 hover:bg-white/40 admin eraser">
@@ -384,6 +384,66 @@ tailwind.config = {
     </div>
   </div>
 </div>
+<!-- modifier produit -->
+ <div id="modal-modif" class=" hidden fixed inset-0 bg-cara-900/50 z-[200] items-center justify-center backdrop-blur-sm">
+  <div class="modal-box bg-cara-100 border border-cara-600/30 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl mx-4">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-cara-600/20 bg-cara-500 rounded-t-2xl">
+      <span class="font-display text-lg italic text-cara-900">Modifier un produit</span>
+      <button onclick="closeModal('modif-produit')" class="text-cara-700 hover:text-cara-900 text-2xl leading-none">&times;</button>
+    </div>
+    <div class="p-6">
+      <form method="POST" action="modif_produit.php" enctype="multipart/form-data">
+        <input type="hidden" name="id" >
+        <div class="grid grid-cols-2 gap-4">
+
+
+          <!-- Champs  →  à remplir à ta façon -->
+          <div class="col-span-2 field">
+            <label>Nom du produit</label>
+            <input type="text" name="nom" required placeholder="Ex : Robe Avella Rose" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900">
+          </div>
+          <div class="field">
+            <label>Prix (TND)</label>
+            <input type="number" name="prix" step="0.01" required placeholder="0.00" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900">
+          </div>
+           <div class="field">
+           <label>id Boutique</label>
+           <input type="number" name="boutique_id" step="0.01" required placeholder="0.00" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900" >
+           </div>
+          <div class="field">
+            <label>Catégorie</label>
+            <select name="categorie_id" required>
+              <option value=''>— Choisir —</option>
+                   <?php
+                 $cat=new categories();
+                $tab=$cat->categorie();
+               foreach($tab as $row): ?>
+                 <option value='<?php echo $row->id ?>'><?php echo $row->nom ?></option>
+                 <?php endforeach ?>
+            </select>
+          </div>
+          <div class="col-span-2 field">
+            <label>Description</label>
+            <textarea name="description" rows="3" placeholder="Description…" class=" border-2 border-cara-700 focus:border-cara-700 focus:outline-none text-cara-900"></textarea>
+          </div>
+          <div class="col-span-2 field">
+            <label>Image</label>
+            <input type="file" name="image" accept="image/*" >
+          </div>
+
+
+        </div>
+        <!-- Footer modal -->
+        <div class="flex justify-end gap-3 pt-4 mt-4 border-t border-cara-600/20">
+          <button type="button" onclick="closeModal('modif-produit')" class="btn-ghost">Annuler</button>
+          <button type="submit" class="btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 
 <!-- Modal Catégorie -->
 <div id="modal-categorie" class="modal hidden fixed inset-0 bg-cara-900/50 z-[200] items-center justify-center backdrop-blur-sm">
@@ -477,7 +537,47 @@ document.querySelectorAll('.eraser').forEach(btn => {
     deleteItem('produit',id , row);  // ta fonction déjà existante !
   });
 });
+document.querySelectorAll('.modif').forEach(btn => {
+  btn.addEventListener('click', function () {
+    const id = this.dataset.id;
 
+    // Étape 1 : récupère les données et pré-remplit la modal
+    fetch('get_produit.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        const p = data.produit;
+          const set = (name, val) => {
+            const el = document.querySelector(`#modal-modif [name="${name}"]`);
+            if (el) el.value = val;
+            else console.warn(`Champ introuvable : ${name}`); // 👈 dira lequel manque
+        };
+
+        set('id',           p.id);
+        set('nom',          p.nom);
+        set('prix',         p.prix);
+        set('boutique_id',  p.boutique_id);
+        set('categorie_id', p.categorie_id);
+        set('description',  p.description);
+
+
+
+
+
+
+
+
+
+
+        openModal('modal-modif');
+      }
+    });
+  });
+});
 
 
 
